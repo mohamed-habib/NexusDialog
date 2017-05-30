@@ -10,6 +10,7 @@ import com.github.dkharrat.nexusdialog.controllers.CheckBoxController;
 import com.github.dkharrat.nexusdialog.controllers.DatePickerController;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
+import com.github.dkharrat.nexusdialog.controllers.RadioGroupController;
 import com.github.dkharrat.nexusdialog.controllers.SelectionController;
 import com.github.dkharrat.nexusdialog.controllers.TimePickerController;
 import com.github.dkharrat.nexusdialog.sample.model.Component;
@@ -18,6 +19,8 @@ import com.github.dkharrat.nexusdialog.sample.model.Section;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesCheckBox;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesDatePicker;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesEditText;
+import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesRadioGroup;
+import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesSignature;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesSpinner;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesTimePicker;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
@@ -81,7 +84,9 @@ public class FormBuilder extends FormWithAppCompatActivity {
             case SPINNER:
                 return convertSpinner(context, component);
             case RADIO_GROUP:
+                return convertRadioGroup(context, component);
             case SIGNATURE:
+                return convertSignature(context, component);
             default:
                 return null;
         }
@@ -134,6 +139,18 @@ public class FormBuilder extends FormWithAppCompatActivity {
             return new CheckBoxController(context, component.getId(), component.getLabel(), inputValidators, properties.getItems(), false);
     }
 
+    private FormElementController convertRadioGroup(Context context, Component component) {
+        Set<InputValidator> inputValidators = getValidators(component.getValidators());
+        PropertiesRadioGroup properties = component.getProperties().getPropertiesRadioGroup();
+
+        if (properties == null)
+            //properties is null, then the check box is useless, it must have items
+            return null;
+        else
+            //properties and validators are not null
+            return new RadioGroupController(context, component.getId(), component.getLabel(), inputValidators, properties.getItems(), false);
+    }
+
     @NonNull
     private FormElementController convertEditText(Context context, Component component) {
         Set<InputValidator> inputValidators = getValidators(component.getValidators());
@@ -145,6 +162,14 @@ public class FormBuilder extends FormWithAppCompatActivity {
         else
             //properties and validators are not null
             return new EditTextController(context, component.getId(), component.getLabel(), properties.getPlaceHolder(), inputValidators, properties.getInputType());
+    }
+
+    @NonNull
+    private FormElementController convertSignature(Context context, Component component) {
+        Set<InputValidator> inputValidators = getValidators(component.getValidators());
+        PropertiesSignature properties = component.getProperties().getPropertiesSignature();
+        return new SignatureLayoutElement(context, component.getId(), component.getLabel(), inputValidators);
+
     }
 
     @NonNull

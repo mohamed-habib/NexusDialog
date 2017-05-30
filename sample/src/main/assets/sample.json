@@ -65,6 +65,22 @@
         },
         {
           "id": "4",
+          "type": "RADIO_GROUP",
+          "label": "You Like",
+          "validators": [
+            "IS_REQUIRED"
+          ],
+          "properties": {
+            "items": [
+              "Sport",
+              "Gaming",
+              "Relaxation",
+              "Development"
+            ]
+          }
+        },
+        {
+          "id": "5",
           "type": "DATE_PICKER",
           "label": "Choose Date",
           "validators": [
@@ -75,7 +91,7 @@
           }
         },
         {
-          "id": "5",
+          "id": "6",
           "type": "TIME_PICKER",
           "label": "Choose Time",
           "validators": [
@@ -85,7 +101,18 @@
             "display_format": "",
             "is_24HourView": true
           }
+        },
+        {
+          "id": "7",
+          "type": "SIGNATURE",
+          "label": "Sign:",
+          "properties": {
+          },
+          "validators": [
+            "IS_REQUIRED"
+          ]
         }
+
       ]
     }
   ]

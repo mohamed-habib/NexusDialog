@@ -47,4 +47,12 @@ public class Property {
     public PropertiesSpinner getPropertiesSpinner() {
         return new PropertiesSpinner(items, prompt);
     }
+
+    public PropertiesRadioGroup getPropertiesRadioGroup() {
+        return new PropertiesRadioGroup(items);
+    }
+
+    public PropertiesSignature getPropertiesSignature() {
+        return new PropertiesSignature();
+    }
 }

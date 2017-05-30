@@ -1,28 +1,39 @@
 package com.github.dkharrat.nexusdialog.sample;
 
 import android.text.InputType;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormWithAppCompatActivity;
-import com.github.dkharrat.nexusdialog.controllers.*;
+import com.github.dkharrat.nexusdialog.controllers.EditTextController;
+import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
+import com.github.dkharrat.nexusdialog.controllers.RadioGroupController;
+import com.github.dkharrat.nexusdialog.controllers.SearchableSelectionController;
 import com.github.dkharrat.nexusdialog.controllers.SearchableSelectionController.SelectionDataSource;
+import com.github.dkharrat.nexusdialog.controllers.SelectionController;
+import com.github.dkharrat.nexusdialog.controllers.ValueController;
 import com.github.dkharrat.nexusdialog.utils.MessageUtil;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 import com.github.dkharrat.nexusdialog.validations.RequiredFieldValidator;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Demonstrates the following functionality:
  * <ul>
- *  <li>SearchableSelectionController</li>
- *  <li>Event handling</li>
- *  <li>Using a Custom Element</li>
- *  <li>Basic Validations</li>
- *  <li>Property change notifications</li>
+ * <li>SearchableSelectionController</li>
+ * <li>Event handling</li>
+ * <li>Using a Custom Element</li>
+ * <li>Basic Validations</li>
+ * <li>Property change notifications</li>
  * </ul>
  */
 public class ComplexForm extends FormWithAppCompatActivity {
@@ -48,10 +59,12 @@ public class ComplexForm extends FormWithAppCompatActivity {
         section.addElement(new SelectionController(this, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
         section.addElement(new SearchableSelectionController(this, FAVORITE_COLOR, "Favorite Color", false, "Blue", dataSource));
         section.addElement(new RadioGroupController(this, "hobbies", "You like", true, Arrays.asList("sport", "gaming", "relaxation", "development"), true));
+        section.addElement(new SignatureLayoutElement(this, "signature", "Sign:"));
 
         CustomElement customElem = new CustomElement(this, CUSTOM_ELEM, "Custom Element");
         customElem.getAddButton().setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 String name = "elem_" + addedElements.size();
                 addedElements.add(name);
                 section.addElement(new ValueController(ComplexForm.this, name, name));
@@ -59,7 +72,8 @@ public class ComplexForm extends FormWithAppCompatActivity {
             }
         });
         customElem.getRemoveButton().setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 if (!addedElements.isEmpty()) {
                     section.removeElement(addedElements.pop());
                     recreateViews();
@@ -74,13 +88,14 @@ public class ComplexForm extends FormWithAppCompatActivity {
         inputValidators.add(new CustomValidation());
         inputValidators.add(new RequiredFieldValidator());
         validationSection.addElement(new EditTextController(this, EVEN_NUMBER, "enter an even number", "Put a number here",
-            inputValidators, InputType.TYPE_CLASS_NUMBER));
+                inputValidators, InputType.TYPE_CLASS_NUMBER));
 
         formController.addSection(section);
         formController.addSection(validationSection);
 
         PropertyChangeListener nameFieldListener = new PropertyChangeListener() {
-            @Override public void propertyChange(PropertyChangeEvent event) {
+            @Override
+            public void propertyChange(PropertyChangeEvent event) {
                 Object firstName = formController.getModel().getValue(FIRST_NAME);
                 Object lastName = formController.getModel().getValue(LAST_NAME);
 
@@ -98,7 +113,8 @@ public class ComplexForm extends FormWithAppCompatActivity {
     }
 
     private final SelectionDataSource dataSource = new SelectionDataSource() {
-        @Override public List<String> getItems() {
+        @Override
+        public List<String> getItems() {
             return Arrays.asList(
                     "Red",
                     "Blue",
@@ -117,7 +133,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)  {
+    public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
         getFormController().resetValidationErrors();
@@ -126,7 +142,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
             Object lastName = getModel().getValue(LAST_NAME);
             Object gender = getModel().getValue(GENDER);
             Object favColor = getModel().getValue(FAVORITE_COLOR);
-            Object number= getModel().getValue(EVEN_NUMBER);
+            Object number = getModel().getValue(EVEN_NUMBER);
 
             String msg = "First name: " + firstName + "\n"
                     + "Last name: " + lastName + "\n"
