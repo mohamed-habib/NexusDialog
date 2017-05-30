@@ -47,6 +47,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
         section.addElement(new ValueController(this, FULL_NAME, "Full name"));
         section.addElement(new SelectionController(this, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
         section.addElement(new SearchableSelectionController(this, FAVORITE_COLOR, "Favorite Color", false, "Blue", dataSource));
+        section.addElement(new RadioGroupController(this, "hobbies", "You like", true, Arrays.asList("sport", "gaming", "relaxation", "development"), true));
 
         CustomElement customElem = new CustomElement(this, CUSTOM_ELEM, "Custom Element");
         customElem.getAddButton().setOnClickListener(new View.OnClickListener() {
@@ -72,10 +73,8 @@ public class ComplexForm extends FormWithAppCompatActivity {
         HashSet<InputValidator> inputValidators = new HashSet<InputValidator>();
         inputValidators.add(new CustomValidation());
         inputValidators.add(new RequiredFieldValidator());
-        validationSection.addElement(new EditTextController(
-            this, EVEN_NUMBER, "enter an even number", "Put a number here",
-            inputValidators, InputType.TYPE_CLASS_NUMBER
-        ));
+        validationSection.addElement(new EditTextController(this, EVEN_NUMBER, "enter an even number", "Put a number here",
+            inputValidators, InputType.TYPE_CLASS_NUMBER));
 
         formController.addSection(section);
         formController.addSection(validationSection);

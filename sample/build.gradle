@@ -39,4 +39,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':nexusdialog')
+    compile 'com.squareup.moshi:moshi:1.5.0'
 }

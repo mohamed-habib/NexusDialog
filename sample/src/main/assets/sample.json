@@ -1,0 +1,92 @@
+{
+  "form_id": "1",
+  "form_title": "Simple Example",
+  "sections": [
+    {
+      "section_id": "section_1",
+      "section_title": "Personal Info",
+      "components": [
+        {
+          "id": "0",
+          "type": "EDIT_TEXT",
+          "label": "First Name",
+          "properties": {
+            "input_value": "",
+            "place_holder": "",
+            "input_type": "1"
+          },
+          "validators": [
+            "IS_REQUIRED"
+          ]
+        },
+        {
+          "id": "1",
+          "type": "EDIT_TEXT",
+          "label": "Last Name",
+          "validators": [
+            "IS_REQUIRED"
+          ],
+          "properties": {
+            "input_value": "",
+            "place_holder": "",
+            "input_type": "1"
+          }
+        },
+        {
+          "id": "2",
+          "type": "SPINNER",
+          "label": "Gender",
+          "validators": [
+            "IS_REQUIRED"
+          ],
+          "properties": {
+            "items": [
+              "Male",
+              "Female"
+            ],
+            "prompt": "Select"
+          }
+        },
+        {
+          "id": "3",
+          "type": "CHECK_BOX",
+          "label": "You Like",
+          "validators": [
+            "IS_REQUIRED"
+          ],
+          "properties": {
+            "items": [
+              "Sport",
+              "Gaming",
+              "Relaxation",
+              "Development"
+            ]
+          }
+        },
+        {
+          "id": "4",
+          "type": "DATE_PICKER",
+          "label": "Choose Date",
+          "validators": [
+            "IS_REQUIRED"
+          ],
+          "properties": {
+            "display_format": ""
+          }
+        },
+        {
+          "id": "5",
+          "type": "TIME_PICKER",
+          "label": "Choose Time",
+          "validators": [
+            "IS_REQUIRED"
+          ],
+          "properties": {
+            "display_format": "",
+            "is_24HourView": true
+          }
+        }
+      ]
+    }
+  ]
+}

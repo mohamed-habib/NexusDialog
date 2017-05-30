@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ComplexForm"/>
+        <activity android:name=".FormBuilder"/>
         <activity android:name=".SimpleExample"/>
         <activity android:name=".CustomFormActivity"/>
         <activity android:name=".FragmentFormActivity"/>

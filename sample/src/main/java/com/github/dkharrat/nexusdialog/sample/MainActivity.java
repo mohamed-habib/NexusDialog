@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent;
                 switch(position) {
                     case 0: {
-                        intent = new Intent(MainActivity.this, SimpleExample.class);
+                        intent = new Intent(MainActivity.this, FormBuilder.class);
                         break;
                     }
                     case 1: {
