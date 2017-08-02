@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
+import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.R;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 
@@ -23,7 +24,7 @@ import java.util.Set;
  * selection can be represented by returning {@code null} for the value of the field.
  */
 public class CheckBoxController extends LabeledFieldController {
-    private final static int CHECKBOX_ID = 101010;
+    private final int CHECKBOX_ID = FormController.generateViewId();
     private final List<String> items;
     private final List<?> values;
 
@@ -59,6 +60,10 @@ public class CheckBoxController extends LabeledFieldController {
         super(ctx, name, labelText, validators);
         this.items = items;
         this.values = values;
+
+        if(values != null && items.size() != values.size()) {
+            throw new IllegalArgumentException("Size of Values and Items must be equal.");
+        }
     }
 
 
@@ -94,6 +99,10 @@ public class CheckBoxController extends LabeledFieldController {
         super(ctx, name, labelText, isRequired);
         this.items = items;
         this.values = values;
+
+        if(values != null && items.size() != values.size()) {
+            throw new IllegalArgumentException("Size of Values and Items must be equal.");
+        }
     }
 
     @Override
@@ -112,7 +121,7 @@ public class CheckBoxController extends LabeledFieldController {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int position = buttonView.getId() - CHECKBOX_ID;
                     Object value = areValuesDefined() ? values.get(position): position;
-                    Set<Object> modelValues = retrieveModelValues();
+                    Set<Object> modelValues = new HashSet<>(retrieveModelValues());
                     if (isChecked) {
                         modelValues.add(value);
                     } else {
@@ -132,7 +141,7 @@ public class CheckBoxController extends LabeledFieldController {
         Set<Object> modelValues = retrieveModelValues();
         checkbox.setChecked(
                 modelValues.contains(
-                        areValuesDefined() ? checkbox.getText() : index
+                        areValuesDefined() ? values.get(index) : index
                 )
         );
     }
