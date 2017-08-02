@@ -66,7 +66,8 @@ public class Component {
         TIME_PICKER,
         SPINNER,
         RADIO_GROUP,
-        SIGNATURE
+        SIGNATURE,
+        IMAGE_VIEW
     }
 
     public enum Validators {

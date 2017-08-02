@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="resourceDrawableKey" type="id" />
+    <item name="imageURIKey" type="id" />
+    <item name="imageResource" type="id" />
+</resources>

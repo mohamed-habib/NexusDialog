@@ -10,6 +10,7 @@ import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormWithAppCompatActivity;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
+import com.github.dkharrat.nexusdialog.controllers.ImageViewController;
 import com.github.dkharrat.nexusdialog.controllers.RadioGroupController;
 import com.github.dkharrat.nexusdialog.controllers.SearchableSelectionController;
 import com.github.dkharrat.nexusdialog.controllers.SearchableSelectionController.SelectionDataSource;
@@ -60,6 +61,13 @@ public class ComplexForm extends FormWithAppCompatActivity {
         section.addElement(new SearchableSelectionController(this, FAVORITE_COLOR, "Favorite Color", false, "Blue", dataSource));
         section.addElement(new RadioGroupController(this, "hobbies", "You like", true, Arrays.asList("sport", "gaming", "relaxation", "development"), true));
         section.addElement(new SignatureLayoutElement(this, "signature", "Sign:"));
+
+        ImageViewController.ImageResourceType imageResourceType = ImageViewController.ImageResourceType.URL;
+        String imageResource = "https://stfalcon.com/uploads/images/5825af1a22628.png";
+        if (ImageViewController.isImageResourceTypeValid(this, imageResource, imageResourceType)) {
+            ImageViewController imageViewController = new ImageViewController(this, "imageView", "Image: ", true, imageResource, imageResourceType);
+            section.addElement(imageViewController);
+        }
 
         CustomElement customElem = new CustomElement(this, CUSTOM_ELEM, "Custom Element");
         customElem.getAddButton().setOnClickListener(new View.OnClickListener() {

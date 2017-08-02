@@ -111,8 +111,19 @@
           "validators": [
             "IS_REQUIRED"
           ]
+        },
+        {
+          "id": "8",
+          "type": "IMAGE_VIEW",
+          "label": "Image:",
+          "properties": {
+            "imageResourceType": "DRAWABLE",
+            "imageResource": "photo"
+          },
+          "validators": [
+            "IS_REQUIRED"
+          ]
         }
-
       ]
     }
   ]

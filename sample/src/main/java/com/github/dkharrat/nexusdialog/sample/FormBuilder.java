@@ -10,6 +10,7 @@ import com.github.dkharrat.nexusdialog.controllers.CheckBoxController;
 import com.github.dkharrat.nexusdialog.controllers.DatePickerController;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
+import com.github.dkharrat.nexusdialog.controllers.ImageViewController;
 import com.github.dkharrat.nexusdialog.controllers.RadioGroupController;
 import com.github.dkharrat.nexusdialog.controllers.SelectionController;
 import com.github.dkharrat.nexusdialog.controllers.TimePickerController;
@@ -19,6 +20,7 @@ import com.github.dkharrat.nexusdialog.sample.model.Section;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesCheckBox;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesDatePicker;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesEditText;
+import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesImageView;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesRadioGroup;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesSignature;
 import com.github.dkharrat.nexusdialog.sample.model.property.PropertiesSpinner;
@@ -87,9 +89,23 @@ public class FormBuilder extends FormWithAppCompatActivity {
                 return convertRadioGroup(context, component);
             case SIGNATURE:
                 return convertSignature(context, component);
+            case IMAGE_VIEW:
+                return convertImageView(context, component);
             default:
                 return null;
         }
+    }
+
+    private FormElementController convertImageView(Context context, Component component) {
+        Set<InputValidator> inputValidators = getValidators(component.getValidators());
+        PropertiesImageView properties = component.getProperties().getPropertiesPropertiesImageView();
+
+        if (properties == null || !ImageViewController.isImageResourceTypeValid(context, properties.getImageResource(), properties.getImageResourceType()))
+            return null;
+        else
+            //properties and validators are not null
+            return new ImageViewController(context, component.getId(), component.getLabel(), inputValidators, properties.getImageResource(), properties.getImageResourceType());
+
     }
 
     private FormElementController convertSpinner(Context context, Component component) {

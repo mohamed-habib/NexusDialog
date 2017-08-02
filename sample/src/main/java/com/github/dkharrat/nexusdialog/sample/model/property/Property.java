@@ -1,5 +1,6 @@
 package com.github.dkharrat.nexusdialog.sample.model.property;
 
+import com.github.dkharrat.nexusdialog.controllers.ImageViewController;
 import com.squareup.moshi.Json;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class Property {
     @Json(name = "input_type")
     protected int inputType;
 
+    @Json(name = "imageResourceType")
+    protected ImageViewController.ImageResourceType imageResourceType;
+    @Json(name = "imageResource")
+    protected String imageResource;
+
     public PropertiesEditText getPropertiesEditText() {
         return new PropertiesEditText(inputValue, placeHolder, inputType);
     }
@@ -54,5 +60,9 @@ public class Property {
 
     public PropertiesSignature getPropertiesSignature() {
         return new PropertiesSignature();
+    }
+
+    public PropertiesImageView getPropertiesPropertiesImageView() {
+        return new PropertiesImageView(imageResource, imageResourceType);
     }
 }

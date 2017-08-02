@@ -27,7 +27,6 @@ public class RadioGroupController extends LabeledFieldController {
     private final List<?> values;
     private final int radioGroupId = FormController.generateViewId();
 
-
     /**
      * Constructs a new instance of a radio button field.
      *
@@ -61,7 +60,6 @@ public class RadioGroupController extends LabeledFieldController {
         this.items = items;
         this.values = values;
     }
-
 
     /**
      * Constructs a new instance of a radio button field.
@@ -99,8 +97,6 @@ public class RadioGroupController extends LabeledFieldController {
 
     @Override
     protected View createFieldView() {
-//        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        ViewGroup radioGroupContainer = (ViewGroup) inflater.inflate(R.layout.form_radiogroup_container, null);
         RadioGroup radioGroupContainer = new RadioGroup(getContext());
         radioGroupContainer.setId(radioGroupId);
 
@@ -135,7 +131,6 @@ public class RadioGroupController extends LabeledFieldController {
         return radioGroupContainer;
     }
 
-
     /**
      * Returns the values hold in the model.
      *
@@ -149,20 +144,10 @@ public class RadioGroupController extends LabeledFieldController {
         return modelValues;
     }
 
-
     private void refresh(RadioButton radioButton, int index) {
         Set<Object> modelValues = retrieveModelValues();
         radioButton.setChecked(modelValues.contains(areValuesDefined() ? radioButton.getText() : index));
     }
-
-//    public void refresh(CheckBox checkbox, int index) {
-//        Set<Object> modelValues = retrieveModelValues();
-//        checkbox.setChecked(
-//                modelValues.contains(
-//                        areValuesDefined() ? checkbox.getText() : index
-//                )
-//        );
-//    }
 
     @Override
     public void refresh() {
@@ -187,9 +172,9 @@ public class RadioGroupController extends LabeledFieldController {
 
 
     /**
-     * Returns the View containing the checkboxes.
+     * Returns the View containing the radioGroup.
      *
-     * @return The View containing the checkboxes.
+     * @return The View containing the radioGroup.
      */
     private ViewGroup getContainer() {
         return (ViewGroup) getView().findViewById(radioGroupId);
